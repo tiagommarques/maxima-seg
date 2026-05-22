@@ -1,0 +1,8 @@
+# Pastas e ficheiros técnicos a ignorar
+.mcp/
+.env
+node_modules/
+.vscode/
+*.log
+.DS_Store
+Thumbs.db

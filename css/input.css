@@ -1,0 +1,6 @@
+/* css/input.css - source file for Tailwind CLI */
+/* Run: npx tailwindcss -i ./css/input.css -o ./css/styles.css --minify */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

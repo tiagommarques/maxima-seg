@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Máxima Segurança | Tecnologia e Proteção 24h</title>
+
+  <!-- 
+    INSTRUÇÃO DE BUILD:
+    1. Abra o terminal nesta pasta
+    2. Execute: npm install
+    3. Execute: npx tailwindcss -i ./css/input.css -o ./css/styles.css --minify
+    4. O arquivo css/styles.css será gerado automaticamente
+    5. Abra o index.html no navegador
+  -->
+
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/custom.css" />
+</head>
+
+<body class="overflow-x-hidden">
+
+  <!-- TopNavBar -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 bg-[#000000] border-b border-white/5 transition-all duration-300">
+    <div id="nav-container"
+      class="flex justify-between items-center h-18 px-4 md:px-gutter max-w-container-max mx-auto transition-all duration-300">
+
+      <!-- Logo -->
+      <div class="flex items-center">
+        <img id="nav-logo" alt="Máxima Segurança Logo"
+          class="h-12 w-auto object-contain transition-all duration-300 hover:scale-105"
+          src="assets/images/logo-nav.png" onerror="this.style.display='none'" />
+      </div>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-primary font-bold border-b-2 border-primary pb-0.5 text-base tracking-wide transition-all duration-300"
+          href="#">Serviços</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide"
+          href="#">Sobre Nós</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide"
+          href="#">Portfólio de Clientes</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide"
+          href="#">Contato</a>
+      </div>
+
+      <!-- Desktop right side -->
+      <div class="hidden md:flex items-center gap-4">
+        <div class="flex items-center gap-1.5 text-white/40">
+          <span class="material-symbols-outlined text-primary" style="font-size:16px">shield</span>
+          <span class="text-[11px] uppercase tracking-wider">Segurança Certificada</span>
+        </div>
+        <button
+          class="bg-primary text-black font-bold text-xs px-5 py-2.5 rounded-sm active:scale-95 transition-all duration-300 hover:bg-white tracking-wider uppercase">
+          Orçamento
+        </button>
+      </div>
+
+      <!-- Mobile: CTA + Hamburger -->
+      <div class="flex md:hidden items-center gap-3">
+        <button
+          class="bg-primary text-black font-bold text-[11px] px-4 py-2 rounded-sm uppercase tracking-wider active:scale-95 transition-all">
+          Orçamento
+        </button>
+        <button id="menu-btn"
+          class="flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-sm hover:bg-white/5 transition-all"
+          aria-label="Menu">
+          <span id="bar1" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="bar2" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="bar3" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile dropdown menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-[#0a0a0a] border-t border-white/5">
+      <div class="px-4 py-6 flex flex-col gap-1">
+        <a class="text-primary font-bold text-sm uppercase tracking-widest py-3 border-b border-white/5"
+          href="#">Serviços</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors"
+          href="#">Sobre Nós</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors"
+          href="#">Portfólio de Clientes</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 hover:text-primary transition-colors"
+          href="#">Contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img alt="Surveillance background" class="w-full h-full object-cover opacity-40 scale-100"
+        src="assets/images/hero-bg.jpg" onerror="this.style.display='none'" />
+      <div class="absolute inset-0 hero-overlay"></div>
+    </div>
+
+    <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter w-full">
+      <div class="max-w-4xl">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-3 h-3 rounded-full bg-primary animate-pulse shadow-[0_0_12px_#FFC000]"></div>
+          <span class="text-primary font-label-md text-label-md uppercase tracking-[0.2em] font-bold">Monitoramento de
+            Alta Performance</span>
+        </div>
+        <h1
+          class="font-display-lg text-display-lg-mobile md:text-[80px] md:leading-[88px] text-white mb-8 brand-shadow">
+          Máxima Segurança: <br />
+          <span class="text-primary">Segurança Eletrônica</span> Especializada
+        </h1>
+        <p
+          class="font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl leading-relaxed border-l-2 border-primary/30 pl-6">
+          Soluções de engenharia em segurança eletrônica para residências e empresas. Tecnologia de ponta, resposta
+          imediata e vigilância ininterrupta para seu patrimônio.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-5">
+          <button
+            class="bg-primary text-black px-10 py-5 rounded-sm font-bold text-label-md uppercase tracking-wider flex items-center justify-center gap-3 hover:bg-white transition-all active:scale-95 shadow-2xl shadow-primary/20">
+            FALAR COM CONSULTOR
+            <span class="material-symbols-outlined font-bold">arrow_forward</span>
+          </button>
+          <button
+            class="glass-card px-10 py-5 rounded-sm font-bold text-label-md uppercase text-white hover:bg-white/10 transition-all tracking-wider border-white/20">
+            CONHECER SOLUÇÕES
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIX: Scroll Indicator movido para fora do fluxo relativo do header, usando fixed -->
+    <div id="scroll-indicator"
+      class="fixed bottom-12 left-1/2 -translate-x-1/2 hidden md:block opacity-40 transition-opacity duration-300 z-40">
+      <div class="w-7 h-12 border-2 border-white/30 rounded-full flex justify-center p-1.5">
+        <div class="w-1.5 h-2.5 bg-primary rounded-full animate-bounce"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Services Section -->
+  <section class="py-section-padding-mobile md:py-section-padding-desktop bg-black relative">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <div class="text-center mb-24">
+        <h2
+          class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-6 uppercase tracking-tight">
+          Portfólio de Proteção</h2>
+        <div class="w-20 h-1.5 bg-primary mx-auto"></div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+
+        <div
+          class="glass-card p-10 rounded-sm group hover:border-primary/50 transition-all duration-500 hover:-translate-y-3">
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-primary text-6xl"
+              style="font-variation-settings: 'FILL' 0;">photo_camera</span>
+          </div>
+          <h3 class="font-headline-md text-[24px] text-white mb-5 uppercase tracking-wide">Câmeras (CFTV IP 4K)</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Sistemas de imagem ultra-HD com
+            análise inteligente de vídeo e acesso via nuvem para monitoramento remoto.</p>
+        </div>
+
+        <div
+          class="glass-card p-10 rounded-sm group hover:border-primary/50 transition-all duration-500 hover:-translate-y-3 border-l-2 border-l-primary/10">
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-primary text-6xl"
+              style="font-variation-settings: 'FILL' 0;">bolt</span>
+          </div>
+          <h3 class="font-headline-md text-[24px] text-white mb-5 uppercase tracking-wide">Cerca Elétrica (Residencial e
+            Industrial)</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Instalação completa de barreiras
+            perimetrais de alta voltagem para proteção de casas e complexos industriais.</p>
+        </div>
+
+        <div
+          class="glass-card p-10 rounded-sm group hover:border-primary/50 transition-all duration-500 hover:-translate-y-3 border-l-2 border-l-primary/10">
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-primary text-6xl"
+              style="font-variation-settings: 'FILL' 0;">wifi</span>
+          </div>
+          <h3 class="font-headline-md text-[24px] text-white mb-5 uppercase tracking-wide">Redes Wi-Fi (Projeto e
+            Configuração)</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Projeto, instalação e
+            configuração de redes de alta performance para Pessoas Físicas e o setor Corporativo.</p>
+        </div>
+
+        <div
+          class="glass-card p-10 rounded-sm group hover:border-primary/50 transition-all duration-500 hover:-translate-y-3">
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-primary text-6xl"
+              style="font-variation-settings: 'FILL' 0;">emergency_home</span>
+          </div>
+          <h3 class="font-headline-md text-[24px] text-white mb-5 uppercase tracking-wide">Sensores &amp; Alarmes</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Sensores de alta sensibilidade
+            com monitoramento imediato e integração total com sistemas de segurança.</p>
+        </div>
+
+        <div
+          class="glass-card p-10 rounded-sm group hover:border-primary/50 transition-all duration-500 hover:-translate-y-3">
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-primary text-6xl"
+              style="font-variation-settings: 'FILL' 0;">face</span>
+          </div>
+          <h3 class="font-headline-md text-[24px] text-white mb-5 uppercase tracking-wide">Vídeo Porteiro &amp; Controle
+            Bio</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Acesso por biometria e
+            reconhecimento facial para máxima conveniência e segurança em condomínios e empresas.</p>
+        </div>
+
+        <div
+          class="glass-card p-10 rounded-sm group hover:border-primary/50 transition-all duration-500 hover:-translate-y-3">
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-primary text-6xl"
+              style="font-variation-settings: 'FILL' 0;">speed</span>
+          </div>
+          <h3 class="font-headline-md text-[24px] text-white mb-5 uppercase tracking-wide">Automação de Portão (Garen)
+          </h3>
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Motores industriais de alta
+            velocidade. Abertura completa em menos de 4 segundos para agilidade e segurança.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section
+    class="py-section-padding-mobile md:py-section-padding-desktop bg-surface-container-low border-y border-white/5">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <div class="flex flex-col lg:flex-row gap-20 items-center">
+        <div class="lg:w-1/2">
+          <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-10 leading-tight">
+            Parceiros em <br /><span class="text-primary">Tecnologia Avançada</span></h2>
+          <div class="grid grid-cols-2 gap-6 mb-12">
+            <div
+              class="h-24 glass-card rounded-sm flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+              <span class="text-white font-black text-2xl tracking-tighter">INTELBRAS</span>
+            </div>
+            <div
+              class="h-24 glass-card rounded-sm flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+              <span class="text-white font-black text-2xl tracking-tighter">HIKVISION</span>
+            </div>
+            <div
+              class="h-24 glass-card rounded-sm flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+              <span class="text-white font-black text-2xl tracking-tighter">JFL ALARMES</span>
+            </div>
+            <div
+              class="h-24 glass-card rounded-sm flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default">
+              <span class="text-white font-black text-2xl tracking-tighter">PPA MOTORS</span>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/2 grid gap-8">
+          <div class="glass-card p-10 border-l-4 border-l-primary rounded-sm shadow-xl">
+            <p class="font-body-md text-on-surface italic mb-6 text-lg leading-relaxed">"O nível de profissionalismo da
+              Máxima Segurança é inigualável. Implementamos o sistema de CFTV IP e o monitoramento é cristalino."</p>
+            <div class="flex items-center gap-5">
+              <div
+                class="w-12 h-12 rounded-full bg-primary flex items-center justify-center font-bold text-black text-xl">
+                RS</div>
+              <div>
+                <p class="font-bold text-white uppercase tracking-wider text-sm">Ricardo Silva</p>
+                <p class="text-xs text-primary font-bold">Diretor Comercial</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass-card p-10 border-l-4 border-l-primary rounded-sm shadow-xl">
+            <p class="font-body-md text-on-surface italic mb-6 text-lg leading-relaxed">"Instalaram a cerca elétrica e o
+              motor ultra-rápido em tempo recorde. Sinto minha família protegida de verdade agora."</p>
+            <div class="flex items-center gap-5">
+              <div
+                class="w-12 h-12 rounded-full bg-primary flex items-center justify-center font-bold text-black text-xl">
+                AM</div>
+              <div>
+                <p class="font-bold text-white uppercase tracking-wider text-sm">Ana Paula Mendes</p>
+                <p class="text-xs text-primary font-bold">Residencial Ipu</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Form Section -->
+  <section class="py-section-padding-mobile md:py-section-padding-desktop bg-black">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+        <div>
+          <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-8 leading-tight">
+            Engenharia de Segurança <br /><span class="text-primary">sob medida</span></h2>
+          <p class="font-body-lg text-on-surface-variant mb-12 leading-relaxed text-xl">Nossos consultores técnicos
+            estão prontos para desenhar o projeto ideal para sua infraestrutura. Entre em contato para uma análise
+            técnica.</p>
+          <div class="space-y-8">
+            <div class="flex items-center gap-6">
+              <div class="w-16 h-16 rounded-sm bg-primary/10 flex items-center justify-center border border-primary/20">
+                <span class="material-symbols-outlined text-primary text-3xl">phone_in_talk</span>
+              </div>
+              <div>
+                <p class="text-primary font-bold text-xs uppercase tracking-widest mb-1">Central de Atendimento</p>
+                <p class="text-white font-headline-md text-2xl">(88) 99999-0000</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-6">
+              <div class="w-16 h-16 rounded-sm bg-primary/10 flex items-center justify-center border border-primary/20">
+                <span class="material-symbols-outlined text-primary text-3xl">location_on</span>
+              </div>
+              <div>
+                <p class="text-primary font-bold text-xs uppercase tracking-widest mb-1">Cobertura Operacional</p>
+                <p class="text-white font-headline-md text-2xl">Ipu, Ceará e Região Norte</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card p-10 md:p-12 rounded-sm border-white/10">
+          <form class="space-y-7">
+            <div>
+              <label class="block text-white/60 font-bold text-xs uppercase tracking-widest mb-3">Nome do
+                Solicitante</label>
+              <input
+                class="w-full bg-white/5 border-white/10 rounded-sm focus:border-primary focus:ring-1 focus:ring-primary text-white py-4 px-5 transition-all"
+                placeholder="Digite seu nome completo" type="text" />
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <label class="block text-white/60 font-bold text-xs uppercase tracking-widest mb-3">WhatsApp de
+                  Contato</label>
+                <input
+                  class="w-full bg-white/5 border-white/10 rounded-sm focus:border-primary focus:ring-1 focus:ring-primary text-white py-4 px-5 transition-all"
+                  placeholder="(00) 0 0000-0000" type="tel" />
+              </div>
+              <div>
+                <label class="block text-white/60 font-bold text-xs uppercase tracking-widest mb-3">Área de
+                  Interesse</label>
+                <select
+                  class="w-full bg-white/5 border-white/10 rounded-sm focus:border-primary focus:ring-1 focus:ring-primary text-white py-4 px-5 transition-all">
+                  <option class="bg-black">CFTV / Monitoramento</option>
+                  <option class="bg-black">Cerca Residencial/Industrial</option>
+                  <option class="bg-black">Redes Wi-Fi / Conectividade</option>
+                  <option class="bg-black">Controle de Acessos</option>
+                  <option class="bg-black">Automação de Portões</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-white/60 font-bold text-xs uppercase tracking-widest mb-3">Escopo do
+                Projeto</label>
+              <textarea
+                class="w-full bg-white/5 border-white/10 rounded-sm focus:border-primary focus:ring-1 focus:ring-primary text-white py-4 px-5 transition-all"
+                placeholder="Descreva brevemente sua necessidade..." rows="4"></textarea>
+            </div>
+            <button type="submit"
+              class="w-full bg-primary text-black py-5 rounded-sm font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl shadow-primary/20">
+              SOLICITAR ANÁLISE TÉCNICA
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/5 w-full py-24 bg-[#000000]">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 px-margin-mobile md:px-gutter max-w-container-max mx-auto">
+      <div class="lg:col-span-1">
+        <div class="flex flex-col gap-8 mb-8">
+          <img alt="Máxima Segurança Logo" class="w-auto self-start h-[180px] object-contain"
+            src="assets/images/logo.png" onerror="this.style.display='none'" />
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Referência em segurança
+            eletrônica. Protegendo vidas e patrimônios com integridade e inovação tecnológica.</p>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Serviços
+          Especializados</h4>
+        <ul class="space-y-5 font-body-md text-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Monitoramento
+              CFTV IP</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Cerca
+              Residencial/Industrial</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Redes Wi-Fi
+              Corporativas</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Manutenção
+              Preventiva</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Automação de
+              Acessos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Links
+          Institucionais</h4>
+        <ul class="space-y-5 font-body-md text-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Sobre a
+              Empresa</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Nossos
+              Parceiros</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Portfólio</a>
+          </li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Contato
+              Direto</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Trabalhe
+              Conosco</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">
+          Newsletter Técnica</h4>
+        <p class="text-on-surface-variant mb-6 font-body-md text-body-md">Receba atualizações sobre novas tecnologias de
+          segurança.</p>
+        <div class="flex">
+          <input
+            class="bg-white/5 border-white/10 rounded-l-sm focus:border-primary text-white py-3 px-4 w-full outline-none"
+            placeholder="Seu melhor e-mail" type="email" />
+          <button class="bg-primary text-black px-6 rounded-r-sm hover:bg-white transition-all">
+            <span class="material-symbols-outlined font-bold">send</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="max-w-container-max mx-auto px-margin-mobile md:px-gutter mt-24 pt-10 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="font-body-md text-xs text-on-surface-variant uppercase tracking-widest">© 2024 Máxima Segurança • Ipu -
+        CE • Todos os direitos reservados.</p>
+      <div class="flex gap-6">
+        <span class="text-[10px] text-white/30 uppercase tracking-widest">Tecnologia Certificada</span>
+        <span class="text-[10px] text-white/30 uppercase tracking-widest">Privacidade Garantida</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Sticky WhatsApp Button -->
+  <a class="fixed bottom-10 right-10 z-[60] bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform hover:shadow-[#25D366]/20 group"
+    href="https://wa.me/5588999990000" target="_blank">
+    <div
+      class="absolute -top-12 right-0 bg-white text-black px-4 py-2 rounded-sm text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-tighter">
+      Falar no WhatsApp
+    </div>
+    <svg fill="currentColor" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+  </a>
+
+  <!-- JS -->
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
