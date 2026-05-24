@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Portfólio de Clientes | Máxima Segurança</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-max.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/custom.css" />
+  <style>
+    .tab-ativo   { color: #ffc000; font-weight: 700; border-bottom: 2px solid #ffc000; }
+    .tab-inativo { color: rgba(255,255,255,0.4); border-bottom: 2px solid transparent; }
+    .tab-inativo:hover { color: #ffc000; }
+    .client-card { background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.4s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; height:100%; }
+    .client-card:hover { border-color: rgba(255,192,0,0.4); transform: translateY(-8px); }
+    .card-logo   { display:flex; align-items:center; justify-content:center; padding:1.5rem; border-bottom:1px solid rgba(255,255,255,0.08); height:200px; overflow:hidden; }
+    .card-body   { padding:1.5rem; display:flex; flex-direction:column; gap:1.25rem; flex-grow:1; background:rgba(27,27,27,0.5); }
+    .card-field  { display:flex; align-items:flex-start; gap:1rem; }
+    .card-label  { font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:#ffc000; font-weight:700; margin-bottom:2px; }
+    .card-value  { font-size:15px; color:#e2e2e2; }
+    .tag         { background:rgba(53,53,53,0.8); border:1px solid rgba(255,255,255,0.1); padding:4px 10px; font-size:11px; font-weight:700; border-radius:2px; color:rgba(212,197,171,0.8); }
+    .solution-wrap { padding-top:1rem; border-top:1px solid rgba(255,255,255,0.08); margin-top:auto; min-height:90px; }
+    .grid-clientes { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+    @media(min-width:640px){ .grid-clientes{ grid-template-columns:repeat(2,1fr); } }
+    @media(min-width:1024px){ .grid-clientes{ grid-template-columns:repeat(3,1fr); } }
+  </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 bg-[#000000] border-b border-white/5 transition-all duration-300">
+    <div id="nav-container" class="flex justify-between items-center h-18 px-4 md:px-gutter max-w-container-max mx-auto transition-all duration-300">
+      <div class="flex items-center">
+        <a href="index.html">
+          <img id="nav-logo" alt="Máxima Segurança Logo" class="h-12 w-auto object-contain transition-all duration-300 hover:scale-105" src="assets/images/logo-nav.png" onerror="this.style.display='none'" />
+        </a>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="index.html#servicos">Serviços</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="index.html">Sobre Nós</a>
+        <a class="text-primary font-bold border-b-2 border-primary pb-0.5 text-base tracking-wide" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Portfólio de Clientes</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="index.html">Contato</a>
+      </div>
+      <div class="hidden md:flex items-center gap-4">
+        <div class="flex items-center gap-1.5 text-white/40">
+          <span class="material-symbols-outlined text-primary" style="font-size:16px">shield</span>
+          <span class="text-[11px] uppercase tracking-wider">Segurança Certificada</span>
+        </div>
+        <button class="bg-primary text-black font-bold text-xs px-5 py-2.5 rounded-sm active:scale-95 transition-all duration-300 hover:bg-white tracking-wider uppercase">Orçamento</button>
+      </div>
+      <div class="flex md:hidden items-center gap-3">
+        <button class="bg-primary text-black font-bold text-[11px] px-4 py-2 rounded-sm uppercase tracking-wider active:scale-95 transition-all">Orçamento</button>
+        <button id="menu-btn" class="flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-sm hover:bg-white/5 transition-all" aria-label="Menu">
+          <span id="bar1" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="bar2" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="bar3" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-[#0a0a0a] border-t border-white/5">
+      <div class="px-4 py-6 flex flex-col gap-1">
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors" href="index.html#servicos">Serviços</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors" href="index.html">Sobre Nós</a>
+        <a class="text-primary font-bold text-sm uppercase tracking-widest py-3 border-b border-white/5" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Portfólio</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 hover:text-primary transition-colors" href="index.html">Contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section style="position:relative;height:40vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding-top:72px;">
+    <div style="position:absolute;inset:0;z-index:0;">
+      <img src="assets/images/hero-bg.jpg" style="width:100%;height:100%;object-fit:cover;opacity:0.4;" onerror="this.style.display='none'" />
+      <div class="hero-overlay" style="position:absolute;inset:0;"></div>
+    </div>
+    <div style="position:relative;z-index:10;text-align:center;padding:0 1rem;max-width:1000px;margin:0 auto;">
+      <h1 style="font-family:'Inter',sans-serif;font-size:clamp(22px,3vw,38px);font-weight:800;color:#fff;margin-bottom:0.75rem;text-transform:uppercase;letter-spacing:-0.01em;white-space:nowrap;">
+        Nossos Clientes &amp; Cases de Sucesso
+      </h1>
+      <p style="color:rgba(255,255,255,0.5);font-size:clamp(13px,1.5vw,16px);line-height:1.7;max-width:680px;margin:0 auto;">
+        Cada cliente é único. Cada projeto é único. Entre em contato diretamente para verificar nossas referências e descobrir como protegemos o que é mais importante.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== PORTFOLIO ===== -->
+  <main style="background:#0a0a0a;padding:2rem 0 4rem;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 1.5rem;">
+
+      <!-- Abas -->
+      <div style="display:flex;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2.5rem;">
+        <div style="display:flex;gap:2rem;">
+          <button id="tab-empresas" onclick="switchTab('empresas')"
+            style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:16px;text-transform:uppercase;letter-spacing:0.1em;transition:all 0.3s;cursor:pointer;background:none;border:none;"
+            class="tab-ativo">Empresas</button>
+          <button id="tab-residencial" onclick="switchTab('residencial')"
+            style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:16px;text-transform:uppercase;letter-spacing:0.1em;transition:all 0.3s;cursor:pointer;background:none;border:none;"
+            class="tab-inativo">Residencial</button>
+        </div>
+      </div>
+
+      <!-- Grids -->
+      <div id="grid-empresas" class="grid-clientes"></div>
+      <div id="grid-residencial" class="grid-clientes" style="display:none;"></div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="border-t border-white/5 w-full py-24 bg-[#000000]">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 px-margin-mobile md:px-gutter max-w-container-max mx-auto">
+      <div class="lg:col-span-1">
+        <div class="flex flex-col gap-8 mb-8">
+          <img alt="Máxima Segurança Logo" class="w-auto self-start h-[180px] object-contain" src="assets/images/logo.png" onerror="this.style.display='none'" />
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Referência em segurança eletrônica. Protegendo vidas e patrimônios com integridade e inovação tecnológica.</p>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Serviços Especializados</h4>
+        <ul class="space-y-5 font-body-md text-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Monitoramento CFTV IP</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Cerca Residencial/Industrial</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Redes Wi-Fi Corporativas</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Manutenção Preventiva</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Automação de Portões</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Links Institucionais</h4>
+        <ul class="space-y-5 font-body-md text-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Sobre a Empresa</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Nossos Parceiros</a></li>
+          <li><a class="text-primary font-bold" href="portfolio.html">Portfólio</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Contato Direto</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Trabalhe Conosco</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Newsletter Técnica</h4>
+        <p class="text-on-surface-variant mb-6 font-body-md text-body-md">Receba atualizações sobre novas tecnologias de segurança.</p>
+        <div class="flex">
+          <input class="bg-white/5 border-white/10 rounded-l-sm focus:border-primary text-white py-3 px-4 w-full outline-none" placeholder="Seu melhor e-mail" type="email" />
+          <button class="bg-primary text-black px-6 rounded-r-sm hover:bg-white transition-all">
+            <span class="material-symbols-outlined font-bold">send</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter mt-24 pt-10 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="font-body-md text-xs text-on-surface-variant uppercase tracking-widest">© 2024 Máxima Segurança • Ipu - CE • Todos os direitos reservados.</p>
+      <div class="flex gap-6">
+        <span class="text-[10px] text-white/30 uppercase tracking-widest">Tecnologia Certificada</span>
+        <span class="text-[10px] text-white/30 uppercase tracking-widest">Privacidade Garantida</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a class="fixed bottom-10 right-10 z-[60] bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform group" href="https://wa.me/5588999990000" target="_blank">
+    <div class="absolute -top-12 right-0 bg-white text-black px-4 py-2 rounded-sm text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-tighter">Falar no WhatsApp</div>
+    <svg fill="currentColor" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script>
+    // ===== DADOS DOS CLIENTES =====
+    const empresas = [
+      { nome:"Lourinho Veículos",      segmento:"Concessionária de Veículos", cidade:"Ipu - CE",              contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:"assets/images/Lourinho.jpg", icon:"storefront" },
+      { nome:"Posto Aliança",           segmento:"Varejo Combustíveis",         cidade:"Sobral - CE",           contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"gas_meter" },
+      { nome:"Logisul",                 segmento:"Centro Logístico",            cidade:"Eusébio - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"inventory_2" },
+      { nome:"Hospital São Lucas",      segmento:"Saúde",                       cidade:"Sobral - CE",           contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"medical_services" },
+      { nome:"Colégio Ateneu",          segmento:"Educação",                    cidade:"Tianguá - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"school" },
+      { nome:"Indústria Têxtil Ceará",  segmento:"Industrial",                  cidade:"Maracanaú - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"factory" },
+      { nome:"Shopping Ipu",            segmento:"Varejo / Shopping",           cidade:"Ipu - CE",              contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"shopping_bag" },
+      { nome:"Farmácias Preço Baixo",   segmento:"Varejo Farmacêutico",         cidade:"Sobral - CE",           contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"medication" },
+      { nome:"Supermercado Pinheiro",   segmento:"Varejo Alimentar",            cidade:"Fortaleza - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"shopping_cart" },
+      { nome:"Hotel Villa Real",        segmento:"Hotelaria",                   cidade:"Juazeiro do Norte - CE",contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"hotel" },
+      { nome:"Distribuidora Nordeste",  segmento:"Logística",                   cidade:"Maracanaú - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"local_shipping" },
+      { nome:"Clínica Integrada",       segmento:"Saúde",                       cidade:"Tianguá - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"health_and_safety" },
+      { nome:"Polo Têxtil",             segmento:"Industrial",                  cidade:"Eusébio - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"precision_manufacturing" },
+      { nome:"Livraria do Campus",      segmento:"Varejo",                      cidade:"Sobral - CE",           contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"menu_book" },
+      { nome:"Academia Performance",    segmento:"Serviços",                    cidade:"Fortaleza - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"fitness_center" },
+      { nome:"Restaurante Estrela",     segmento:"Gastronomia",                 cidade:"Ipu - CE",              contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"restaurant" },
+      { nome:"Cooperativa Agrícola",    segmento:"Agronegócio",                 cidade:"Tianguá - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"agriculture" },
+      { nome:"Escola Maple Bear",       segmento:"Educação",                    cidade:"Juazeiro do Norte - CE",contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"child_care" },
+      { nome:"Condomínio Corporate",    segmento:"Empresarial",                 cidade:"Fortaleza - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"business" },
+      { nome:"Indústria de Plásticos",  segmento:"Industrial",                  cidade:"Maracanaú - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"settings_input_component" },
+      { nome:"Auto Shopping Ceará",     segmento:"Automotivo",                  cidade:"Eusébio - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"directions_car" }
+    ];
+
+    const residencial = [
+      { nome:"Residencial Jardins", segmento:"Residencial", cidade:"Fortaleza - CE", contato:"(88) 99999-0000", solucao:"Cerca Elétrica, Monitoramento IP",    logo:null, icon:"home" },
+      { nome:"Condomínio Solar",    segmento:"Residencial", cidade:"Sobral - CE",    contato:"(88) 99999-0000", solucao:"Alarme Monitorado, Automação",         logo:null, icon:"shield" },
+      { nome:"Família Silva",       segmento:"Residencial", cidade:"Ipu - CE",       contato:"(88) 99999-0000", solucao:"CFTV Residencial, Botão de Pânico",   logo:null, icon:"home" }
+    ];
+
+    function criarCard(c, mostrarContato = true) {
+      const topo = c.logo
+        ? `<img src="${c.logo}" alt="Logo ${c.nome}" style="width:100%;height:100%;object-fit:cover;" />`
+        : `<span class="material-symbols-outlined" style="font-size:96px;color:#ffc000;">${c.icon}</span>`;
+
+      const tags = c.solucao.split(', ').map(s => `<span class="tag">${s}</span>`).join('');
+
+      const contatoHTML = mostrarContato ? `
+            <div class="card-field">
+              <span class="material-symbols-outlined" style="font-size:20px;color:#ffc000;flex-shrink:0;">call</span>
+              <div><p class="card-label">Contato</p><p class="card-value">${c.contato}</p></div>
+            </div>` : '';
+
+      return `
+        <div class="client-card">
+          <div class="card-logo">${topo}</div>
+          <div class="card-body">
+            <div>
+              <div class="card-field" style="margin-bottom:1rem;">
+                <span class="material-symbols-outlined" style="font-size:20px;color:#ffc000;flex-shrink:0;">person</span>
+                <div><p class="card-label">Cliente</p><p class="card-value" style="font-weight:600;">${c.nome}</p></div>
+              </div>
+              <div class="card-field" style="margin-bottom:1rem;">
+                <span class="material-symbols-outlined" style="font-size:20px;color:#ffc000;flex-shrink:0;">category</span>
+                <div><p class="card-label">Segmento</p><p class="card-value">${c.segmento}</p></div>
+              </div>
+              <div class="card-field" style="margin-bottom:1rem;">
+                <span class="material-symbols-outlined" style="font-size:20px;color:#ffc000;flex-shrink:0;">location_on</span>
+                <div><p class="card-label">Cidade</p><p class="card-value">${c.cidade}</p></div>
+              </div>
+              ${contatoHTML}
+            </div>
+            <div class="solution-wrap" style="margin-top:auto;">
+              <p class="card-label" style="margin-bottom:8px;">Solução</p>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;">${tags}</div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    document.getElementById('grid-empresas').innerHTML   = empresas.map(c => criarCard(c, true)).join('');
+    document.getElementById('grid-residencial').innerHTML = residencial.map(c => criarCard(c, false)).join('');
+
+    function switchTab(aba) {
+      const ge = document.getElementById('grid-empresas');
+      const gr = document.getElementById('grid-residencial');
+      const te = document.getElementById('tab-empresas');
+      const tr = document.getElementById('tab-residencial');
+
+      if (aba === 'empresas') {
+        ge.style.display = 'grid'; gr.style.display = 'none';
+        te.className = 'tab-ativo'; tr.className = 'tab-inativo';
+      } else {
+        ge.style.display = 'none'; gr.style.display = 'grid';
+        tr.className = 'tab-ativo'; te.className = 'tab-inativo';
+      }
+    }
+  </script>
+
+</body>
+</html>
