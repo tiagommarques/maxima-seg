@@ -134,7 +134,7 @@
         <ul class="space-y-5 font-body-md text-body-md">
           <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Sobre a Empresa</a></li>
           <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Nossos Parceiros</a></li>
-          <li><a class="text-primary font-bold" href="portfolio.html">Portfólio</a></li>
+          <li><a class="text-primary font-bold" href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Portfólio</a></li>
           <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Contato Direto</a></li>
           <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Trabalhe Conosco</a></li>
         </ul>
@@ -170,32 +170,32 @@
     // ===== DADOS DOS CLIENTES =====
     const empresas = [
       { nome:"Lourinho Veículos",      segmento:"Concessionária de Veículos", cidade:"Ipu - CE",              contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:"assets/images/Lourinho.jpg", icon:"storefront" },
-      { nome:"Posto Aliança",           segmento:"Varejo Combustíveis",         cidade:"Sobral - CE",           contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"gas_meter" },
-      { nome:"Logisul",                 segmento:"Centro Logístico",            cidade:"Eusébio - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"inventory_2" },
-      { nome:"Hospital São Lucas",      segmento:"Saúde",                       cidade:"Sobral - CE",           contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"medical_services" },
-      { nome:"Colégio Ateneu",          segmento:"Educação",                    cidade:"Tianguá - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"school" },
-      { nome:"Indústria Têxtil Ceará",  segmento:"Industrial",                  cidade:"Maracanaú - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"factory" },
-      { nome:"Shopping Ipu",            segmento:"Varejo / Shopping",           cidade:"Ipu - CE",              contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"shopping_bag" },
-      { nome:"Farmácias Preço Baixo",   segmento:"Varejo Farmacêutico",         cidade:"Sobral - CE",           contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"medication" },
-      { nome:"Supermercado Pinheiro",   segmento:"Varejo Alimentar",            cidade:"Fortaleza - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"shopping_cart" },
-      { nome:"Hotel Villa Real",        segmento:"Hotelaria",                   cidade:"Juazeiro do Norte - CE",contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"hotel" },
-      { nome:"Distribuidora Nordeste",  segmento:"Logística",                   cidade:"Maracanaú - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"local_shipping" },
-      { nome:"Clínica Integrada",       segmento:"Saúde",                       cidade:"Tianguá - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"health_and_safety" },
-      { nome:"Polo Têxtil",             segmento:"Industrial",                  cidade:"Eusébio - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"precision_manufacturing" },
-      { nome:"Livraria do Campus",      segmento:"Varejo",                      cidade:"Sobral - CE",           contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"menu_book" },
-      { nome:"Academia Performance",    segmento:"Serviços",                    cidade:"Fortaleza - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"fitness_center" },
-      { nome:"Restaurante Estrela",     segmento:"Gastronomia",                 cidade:"Ipu - CE",              contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"restaurant" },
-      { nome:"Cooperativa Agrícola",    segmento:"Agronegócio",                 cidade:"Tianguá - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"agriculture" },
-      { nome:"Escola Maple Bear",       segmento:"Educação",                    cidade:"Juazeiro do Norte - CE",contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"child_care" },
-      { nome:"Condomínio Corporate",    segmento:"Empresarial",                 cidade:"Fortaleza - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"business" },
-      { nome:"Indústria de Plásticos",  segmento:"Industrial",                  cidade:"Maracanaú - CE",        contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"settings_input_component" },
-      { nome:"Auto Shopping Ceará",     segmento:"Automotivo",                  cidade:"Eusébio - CE",          contato:"(88) 99999-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"directions_car" }
+      { nome:"Posto Aliança",           segmento:"Varejo Combustíveis",         cidade:"Sobral - CE",           contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"gas_meter" },
+      { nome:"Logisul",                 segmento:"Centro Logístico",            cidade:"Eusébio - CE",          contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"inventory_2" },
+      { nome:"Hospital São Lucas",      segmento:"Saúde",                       cidade:"Sobral - CE",           contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"medical_services" },
+      { nome:"Colégio Ateneu",          segmento:"Educação",                    cidade:"Tianguá - CE",          contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"school" },
+      { nome:"Indústria Têxtil Ceará",  segmento:"Industrial",                  cidade:"Maracanaú - CE",        contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"factory" },
+      { nome:"Shopping Ipu",            segmento:"Varejo / Shopping",           cidade:"Ipu - CE",              contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"shopping_bag" },
+      { nome:"Farmácias Preço Baixo",   segmento:"Varejo Farmacêutico",         cidade:"Sobral - CE",           contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"medication" },
+      { nome:"Supermercado Pinheiro",   segmento:"Varejo Alimentar",            cidade:"Fortaleza - CE",        contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"shopping_cart" },
+      { nome:"Hotel Villa Real",        segmento:"Hotelaria",                   cidade:"Juazeiro do Norte - CE",contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"hotel" },
+      { nome:"Distribuidora Nordeste",  segmento:"Logística",                   cidade:"Maracanaú - CE",        contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"local_shipping" },
+      { nome:"Clínica Integrada",       segmento:"Saúde",                       cidade:"Tianguá - CE",          contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"health_and_safety" },
+      { nome:"Polo Têxtil",             segmento:"Industrial",                  cidade:"Eusébio - CE",          contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"precision_manufacturing" },
+      { nome:"Livraria do Campus",      segmento:"Varejo",                      cidade:"Sobral - CE",           contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"menu_book" },
+      { nome:"Academia Performance",    segmento:"Serviços",                    cidade:"Fortaleza - CE",        contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"fitness_center" },
+      { nome:"Restaurante Estrela",     segmento:"Gastronomia",                 cidade:"Ipu - CE",              contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"restaurant" },
+      { nome:"Cooperativa Agrícola",    segmento:"Agronegócio",                 cidade:"Tianguá - CE",          contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"agriculture" },
+      { nome:"Escola Maple Bear",       segmento:"Educação",                    cidade:"Juazeiro do Norte - CE",contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"child_care" },
+      { nome:"Condomínio Corporate",    segmento:"Empresarial",                 cidade:"Fortaleza - CE",        contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"business" },
+      { nome:"Indústria de Plásticos",  segmento:"Industrial",                  cidade:"Maracanaú - CE",        contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"settings_input_component" },
+      { nome:"Auto Shopping Ceará",     segmento:"Automotivo",                  cidade:"Eusébio - CE",          contato:"(88) 90000-0000", solucao:"CFTV IP, Monitoramento 24h, Controle de Acesso", logo:null, icon:"directions_car" }
     ];
 
     const residencial = [
-      { nome:"Residencial Jardins", segmento:"Residencial", cidade:"Fortaleza - CE", contato:"(88) 99999-0000", solucao:"Cerca Elétrica, Monitoramento IP",    logo:null, icon:"home" },
-      { nome:"Condomínio Solar",    segmento:"Residencial", cidade:"Sobral - CE",    contato:"(88) 99999-0000", solucao:"Alarme Monitorado, Automação",         logo:null, icon:"shield" },
-      { nome:"Família Silva",       segmento:"Residencial", cidade:"Ipu - CE",       contato:"(88) 99999-0000", solucao:"CFTV Residencial, Botão de Pânico",   logo:null, icon:"home" }
+      { nome:"Residencial Jardins", segmento:"Residencial", cidade:"Fortaleza - CE", contato:"(88) 90000-0000", solucao:"Cerca Elétrica, Monitoramento IP",    logo:null, icon:"home" },
+      { nome:"Condomínio Solar",    segmento:"Residencial", cidade:"Sobral - CE",    contato:"(88) 90000-0000", solucao:"Alarme Monitorado, Automação",         logo:null, icon:"shield" },
+      { nome:"Família Silva",       segmento:"Residencial", cidade:"Ipu - CE",       contato:"(88) 90000-0000", solucao:"CFTV Residencial, Botão de Pânico",   logo:null, icon:"home" }
     ];
 
     function criarCard(c, mostrarContato = true) {
