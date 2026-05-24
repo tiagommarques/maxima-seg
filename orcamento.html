@@ -88,7 +88,7 @@
   <section class="py-16 bg-surface-container-low border-y border-white/5">
     <div style="max-width:780px;margin:0 auto;padding:0 1.5rem;">
 
-      <form id="form-orcamento" action="https://formspree.io/f/SEU_ID_AQUI" method="POST" class="glass-card p-8 md:p-12 rounded-sm">
+      <form id="form-orcamento" class="glass-card p-8 md:p-12 rounded-sm">
 
         <!-- Título interno -->
         <div style="margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08);">
@@ -187,7 +187,7 @@
         </div>
 
         <!-- Botão -->
-        <button type="submit"
+        <button type="button" onclick="enviarOrcamento()"
           class="w-full bg-primary text-black py-5 rounded-sm font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-3">
           <span class="material-symbols-outlined font-bold">send</span>
           Enviar Solicitação de Orçamento
@@ -195,7 +195,7 @@
 
         <!-- Aviso -->
         <p style="text-align:center;color:rgba(255,255,255,0.3);font-size:12px;margin-top:1rem;">
-          Retornamos em até 24 horas úteis via WhatsApp ou e-mail.
+          Você será redirecionado para o WhatsApp para confirmar o envio.
         </p>
 
       </form>
@@ -204,7 +204,7 @@
       <div id="mensagem-sucesso" style="display:none;" class="glass-card p-12 rounded-sm text-center">
         <span class="material-symbols-outlined text-primary" style="font-size:64px;">check_circle</span>
         <h3 style="color:#fff;font-size:24px;font-weight:800;text-transform:uppercase;margin:1rem 0 0.5rem;">Solicitação Enviada!</h3>
-        <p style="color:rgba(255,255,255,0.5);font-size:16px;line-height:1.7;">Recebemos seu pedido de orçamento.<br>Entraremos em contato em breve via WhatsApp.</p>
+        <p style="color:rgba(255,255,255,0.5);font-size:16px;line-height:1.7;">Sua solicitação foi enviada via WhatsApp.<br>Entraremos em contato em breve.</p>
         <a href="index.html" style="display:inline-flex;align-items:center;gap:0.5rem;margin-top:2rem;background:#ffc000;color:#000;padding:1rem 2rem;border-radius:2px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;text-decoration:none;">
           <span class="material-symbols-outlined">home</span>
           Voltar ao Início
@@ -271,23 +271,33 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Exibe mensagem de sucesso após envio
-    const form = document.getElementById('form-orcamento');
-    const sucesso = document.getElementById('mensagem-sucesso');
+    function enviarOrcamento() {
+      const form = document.getElementById('form-orcamento');
 
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const data = new FormData(form);
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.ok) {
-        form.style.display = 'none';
-        sucesso.style.display = 'block';
+      const nome      = form.querySelector('[name="nome"]').value;
+      const whatsapp  = form.querySelector('[name="whatsapp"]').value;
+      const email     = form.querySelector('[name="email"]').value;
+      const cidade    = form.querySelector('[name="cidade"]').value;
+      const imovel    = form.querySelector('[name="tipo_imovel"]').value;
+      const interesse = form.querySelector('[name="area_interesse"]').value;
+      const descricao = form.querySelector('[name="descricao"]').value;
+
+      if (!nome || !whatsapp || !email || !cidade || !imovel || !interesse || !descricao) {
+        alert('Por favor, preencha todos os campos antes de enviar.');
+        return;
       }
-    });
+
+      const msg = `Olá! Segue minha solicitação de orçamento:%0A%0A`
+        + `👤 *Nome:* ${nome}%0A`
+        + `📱 *WhatsApp:* ${whatsapp}%0A`
+        + `📧 *E-mail:* ${email}%0A`
+        + `📍 *Cidade:* ${cidade}%0A`
+        + `🏠 *Tipo de imóvel:* ${imovel}%0A`
+        + `🔒 *Área de interesse:* ${interesse}%0A`
+        + `📝 *Descrição:* ${descricao}`;
+
+      window.open(`https://wa.me/5588997237880?text=${msg}`, '_blank');
+    }
   </script>
 
 </body>

@@ -366,7 +366,7 @@
                 class="w-full bg-white/5 border-white/10 rounded-sm focus:border-primary focus:ring-1 focus:ring-primary text-white py-4 px-5 transition-all"
                 placeholder="Descreva brevemente sua necessidade..." rows="4"></textarea>
             </div>
-            <button type="submit"
+            <button type="button" onclick="enviarAnalise()"
               class="w-full bg-primary text-black py-5 rounded-sm font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl shadow-primary/20">
               SOLICITAR ANÁLISE TÉCNICA
             </button>
@@ -461,6 +461,29 @@
 
   <!-- JS -->
   <script src="js/main.js"></script>
+
+  <script>
+    function enviarAnalise() {
+      const form = document.querySelector('form');
+      const nome      = form.querySelector('input[type="text"]').value;
+      const whatsapp  = form.querySelector('input[type="tel"]').value;
+      const interesse = form.querySelector('select').value;
+      const descricao = form.querySelector('textarea').value;
+
+      if (!nome || !whatsapp || !descricao) {
+        alert('Por favor, preencha todos os campos.');
+        return;
+      }
+
+      const msg = `Olá! Segue minha solicitação de análise técnica:%0A%0A`
+        + `👤 *Nome:* ${nome}%0A`
+        + `📱 *WhatsApp:* ${whatsapp}%0A`
+        + `🔒 *Área de interesse:* ${interesse}%0A`
+        + `📝 *Descrição:* ${descricao}`;
+
+      window.open(`https://wa.me/5588997237880?text=${msg}`, '_blank');
+    }
+  </script>
 
 </body>
 

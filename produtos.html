@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Produtos | Máxima Segurança</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-max.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/custom.css" />
+  <style>
+    .produto-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); transition:all 0.4s cubic-bezier(0.4,0,0.2,1); display:flex; flex-direction:column; position:relative; }
+    .produto-card:hover { border-color:rgba(255,192,0,0.4); transform:translateY(-6px); }
+    .produto-card.selecionado { border-color:#ffc000; background:rgba(255,192,0,0.05); }
+    .produto-img { height:220px; display:flex; align-items:center; justify-content:center; padding:1.5rem; border-bottom:1px solid rgba(255,255,255,0.08); background:#000; overflow:hidden; position:relative; }
+    .produto-img img { max-height:100%; max-width:100%; object-fit:contain; }
+    .produto-img .sem-foto { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; width:100%; height:100%; }
+    .produto-body { padding:1.25rem; display:flex; flex-direction:column; gap:0.75rem; flex-grow:1; }
+    .produto-marca { font-size:10px; font-weight:700; color:#ffc000; text-transform:uppercase; letter-spacing:0.15em; }
+    .produto-nome { font-size:14px; font-weight:700; color:#fff; line-height:1.4; }
+    .produto-categoria { display:inline-flex; align-items:center; gap:4px; background:rgba(255,192,0,0.1); border:1px solid rgba(255,192,0,0.2); padding:3px 10px; font-size:11px; font-weight:700; color:#ffc000; border-radius:2px; width:fit-content; }
+    .checkbox-wrap { padding:1rem 1.25rem; border-top:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:0.75rem; cursor:pointer; }
+    .checkbox-custom { width:20px; height:20px; border:2px solid rgba(255,255,255,0.2); border-radius:3px; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all 0.2s; }
+    .produto-card.selecionado .checkbox-custom { background:#ffc000; border-color:#ffc000; }
+    .checkbox-label { font-size:12px; font-weight:600; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:0.05em; transition:color 0.2s; }
+    .produto-card.selecionado .checkbox-label { color:#ffc000; }
+    .grid-produtos { display:grid; grid-template-columns:1fr; gap:1.5rem; }
+    @media(min-width:640px){ .grid-produtos{ grid-template-columns:repeat(2,1fr); } }
+    @media(min-width:1024px){ .grid-produtos{ grid-template-columns:repeat(3,1fr); } }
+    @media(min-width:1280px){ .grid-produtos{ grid-template-columns:repeat(4,1fr); } }
+    .barra-orcamento { position:fixed; bottom:0; left:0; right:0; z-index:100; background:#000; border-top:2px solid #ffc000; padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; transform:translateY(100%); transition:transform 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .barra-orcamento.visivel { transform:translateY(0); }
+    .barra-info { display:flex; align-items:center; gap:0.75rem; }
+    .barra-count { background:#ffc000; color:#000; font-weight:800; font-size:14px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .barra-texto { color:#fff; font-size:13px; font-weight:600; }
+    .barra-btn { background:#ffc000; color:#000; font-weight:800; font-size:12px; padding:0.75rem 1.5rem; border-radius:2px; text-transform:uppercase; letter-spacing:0.1em; border:none; cursor:pointer; display:flex; align-items:center; gap:0.5rem; white-space:nowrap; transition:background 0.2s; }
+    .barra-btn:hover { background:#fff; }
+    .barra-limpar { background:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); font-size:11px; font-weight:600; padding:0.5rem 1rem; border-radius:2px; cursor:pointer; text-transform:uppercase; letter-spacing:0.05em; transition:all 0.2s; white-space:nowrap; }
+    .barra-limpar:hover { border-color:#ffc000; color:#ffc000; }
+    .tab-cat-ativo { color:#ffc000; font-weight:700; border-bottom:2px solid #ffc000; }
+    .tab-cat-inativo { color:rgba(255,255,255,0.4); border-bottom:2px solid transparent; }
+    .tab-cat-inativo:hover { color:#ffc000; }
+  </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 bg-[#000000] border-b border-white/5 transition-all duration-300">
+    <div id="nav-container" class="flex justify-between items-center h-18 px-4 md:px-gutter max-w-container-max mx-auto transition-all duration-300">
+      <div class="flex items-center">
+        <a href="index.html">
+          <img id="nav-logo" alt="Máxima Segurança Logo" class="h-12 w-auto object-contain transition-all duration-300 hover:scale-105" src="assets/images/logo-nav.png" onerror="this.style.display='none'" />
+        </a>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="index.html#servicos">Serviços</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="sobre.html">Sobre Nós</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="portfolio.html">Portfólio de Clientes</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="contato.html">Contato</a>
+      </div>
+      <div class="hidden md:flex items-center gap-4">
+        <div class="flex items-center gap-1.5 text-white/40">
+          <span class="material-symbols-outlined text-primary" style="font-size:16px">shield</span>
+          <span class="text-[11px] uppercase tracking-wider">Segurança Certificada</span>
+        </div>
+        <a href="orcamento.html">
+          <button class="bg-primary text-black font-bold text-xs px-5 py-2.5 rounded-sm active:scale-95 transition-all duration-300 hover:bg-white tracking-wider uppercase">Orçamento</button>
+        </a>
+      </div>
+      <div class="flex md:hidden items-center gap-3">
+        <a href="orcamento.html">
+          <button class="bg-primary text-black font-bold text-[11px] px-4 py-2 rounded-sm uppercase tracking-wider active:scale-95 transition-all">Orçamento</button>
+        </a>
+        <button id="menu-btn" class="flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-sm hover:bg-white/5 transition-all" aria-label="Menu">
+          <span id="bar1" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="bar2" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="bar3" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-[#0a0a0a] border-t border-white/5">
+      <div class="px-4 py-6 flex flex-col gap-1">
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors" href="index.html#servicos">Serviços</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors" href="sobre.html">Sobre Nós</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors" href="portfolio.html">Portfólio de Clientes</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 hover:text-primary transition-colors" href="contato.html">Contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section style="position:relative;min-height:32vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding-top:72px;padding-bottom:2rem;">
+    <div style="position:absolute;inset:0;z-index:0;">
+      <img src="assets/images/hero-bg.jpg" style="width:100%;height:100%;object-fit:cover;opacity:0.4;" onerror="this.style.display='none'" />
+      <div class="hero-overlay" style="position:absolute;inset:0;"></div>
+    </div>
+    <div style="position:relative;z-index:10;text-align:center;padding:0 1rem;max-width:900px;margin:0 auto;">
+      <h1 style="font-family:'Inter',sans-serif;font-size:clamp(24px,3.5vw,42px);font-weight:800;color:#fff;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:-0.01em;">
+        Nossos <span style="color:#ffc000;">Produtos</span>
+      </h1>
+      <div style="width:80px;height:6px;background:#ffc000;margin:1rem auto;"></div>
+      <p style="color:rgba(255,255,255,0.5);font-size:clamp(13px,1.5vw,16px);line-height:1.7;max-width:600px;margin:0 auto;">
+        Selecione um ou mais produtos e solicite seu orçamento personalizado.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== PRODUTOS ===== -->
+  <main style="background:#0a0a0a;padding:2rem 0 6rem;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+
+      <!-- Filtros -->
+      <div style="display:flex;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2.5rem;overflow-x:auto;">
+        <div style="display:flex;gap:1.5rem;flex-shrink:0;">
+          <button onclick="filtrar('todos')" id="cat-todos" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-ativo">Todos</button>
+          <button onclick="filtrar('DVR')" id="cat-DVR" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">DVR</button>
+          <button onclick="filtrar('Câmeras')" id="cat-Câmeras" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">Câmeras</button>
+          <button onclick="filtrar('Alarmes')" id="cat-Alarmes" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">Alarmes</button>
+          <button onclick="filtrar('Redes/Wi-Fi')" id="cat-Redes/Wi-Fi" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">Redes/Wi-Fi</button>
+          <button onclick="filtrar('Comunicação')" id="cat-Comunicação" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">Comunicação</button>
+        </div>
+      </div>
+
+      <div id="grid-produtos" class="grid-produtos"></div>
+    </div>
+  </main>
+
+  <!-- ===== BARRA FLUTUANTE ===== -->
+  <div id="barra-orcamento" class="barra-orcamento">
+    <div class="barra-info">
+      <div class="barra-count" id="barra-count">0</div>
+      <span class="barra-texto">produto(s) selecionado(s)</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <button class="barra-limpar" onclick="limparSelecao()">Limpar</button>
+      <button class="barra-btn" onclick="solicitarOrcamento()">
+        <span class="material-symbols-outlined" style="font-size:18px;">send</span>
+        Solicitar Orçamento
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="border-t border-white/5 w-full py-24 bg-[#000000]">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 px-margin-mobile md:px-gutter max-w-container-max mx-auto">
+      <div class="lg:col-span-1">
+        <div class="flex flex-col gap-8 mb-8">
+          <img alt="Máxima Segurança Logo" class="w-auto self-start h-[180px] object-contain" src="assets/images/logo.png" onerror="this.style.display='none'" />
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Referência em segurança eletrônica. Protegendo vidas e patrimônios com integridade e inovação tecnológica.</p>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Serviços Especializados</h4>
+        <ul class="space-y-5 font-body-md text-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Monitoramento CFTV IP</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Cerca Residencial/Industrial</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Redes Wi-Fi Corporativas</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Manutenção Preventiva</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Automação de Portões</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Links Institucionais</h4>
+        <ul class="space-y-5 font-body-md text-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="sobre.html">Sobre a Empresa</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Nossos Parceiros</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="portfolio.html">Portfólio</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="contato.html">Contato Direto</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Trabalhe Conosco</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Newsletter Técnica</h4>
+        <p class="text-on-surface-variant mb-6 font-body-md text-body-md">Receba atualizações sobre novas tecnologias de segurança.</p>
+        <div class="flex">
+          <input class="bg-white/5 border-white/10 rounded-l-sm focus:border-primary text-white py-3 px-4 w-full outline-none" placeholder="Seu melhor e-mail" type="email" />
+          <button class="bg-primary text-black px-6 rounded-r-sm hover:bg-white transition-all">
+            <span class="material-symbols-outlined font-bold">send</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter mt-24 pt-10 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="font-body-md text-xs text-on-surface-variant uppercase tracking-widest">© 2024 Máxima Segurança • Ipu - CE • Todos os direitos reservados.</p>
+      <div class="flex gap-6">
+        <span class="text-[10px] text-white/30 uppercase tracking-widest">Tecnologia Certificada</span>
+        <span class="text-[10px] text-white/30 uppercase tracking-widest">Privacidade Garantida</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a class="fixed bottom-10 right-10 z-[60] bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform group" href="https://wa.me/5588997237880" target="_blank">
+    <div class="absolute -top-12 right-0 bg-white text-black px-4 py-2 rounded-sm text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-tighter">Falar no WhatsApp</div>
+    <svg fill="currentColor" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script>
+    const produtos = [
+      // ===== DVR =====
+      { id:1,  nome:"DVR 4 Câmeras - MHDX 1104C - 1080p - S/HD",         marca:"Intelbras",  categoria:"DVR",          foto:"assets/images/produtos/dvr4canais.jpg",  icon:"dvr" },
+      { id:2,  nome:"DVR 8 Câmeras - MHDX 1108C - 1080p - S/HD",         marca:"Intelbras",  categoria:"DVR",          foto:null, icon:"dvr" },
+      { id:3,  nome:"DVR 16 Câmeras - MHDX 1116C - 1080p - S/HD",        marca:"Intelbras",  categoria:"DVR",          foto:null, icon:"dvr" },
+      { id:4,  nome:"NVR 8 Canais - NVD 1308 - 4K - S/HD",               marca:"Intelbras",  categoria:"DVR",          foto:null, icon:"dvr" },
+
+      // ===== CÂMERAS =====
+      { id:5,  nome:"Câmera Bullet VHD 1220 B - 1080p - 20m IR",         marca:"Intelbras",  categoria:"Câmeras",      foto:null, icon:"photo_camera" },
+      { id:6,  nome:"Câmera Dome VHD 1220 D - 1080p - 20m IR",           marca:"Intelbras",  categoria:"Câmeras",      foto:null, icon:"photo_camera" },
+      { id:7,  nome:"Câmera IP Bullet DS-2CD2143G2-I - 4MP",             marca:"Hikvision",  categoria:"Câmeras",      foto:null, icon:"photo_camera" },
+      { id:8,  nome:"Câmera IP Dome DS-2CD2143G2-IS - 4MP - Áudio",      marca:"Hikvision",  categoria:"Câmeras",      foto:null, icon:"photo_camera" },
+
+      // ===== ALARMES =====
+      { id:9,  nome:"Central de Alarme XAT 3000 Smart - 8 Zonas",        marca:"JFL Alarmes",categoria:"Alarmes",      foto:null, icon:"emergency_home" },
+      { id:10, nome:"Sensor Infravermelho Passivo IRP-5000 Pet 20kg",     marca:"JFL Alarmes",categoria:"Alarmes",      foto:null, icon:"sensors" },
+      { id:11, nome:"Sensor Magnético SM-110 - Para Portas e Janelas",    marca:"JFL Alarmes",categoria:"Alarmes",      foto:null, icon:"sensors" },
+      { id:12, nome:"Sirene de Alarme SA-115 - 115dB - Bivolt",          marca:"JFL Alarmes",categoria:"Alarmes",      foto:null, icon:"campaign" },
+
+      // ===== REDES/WI-FI =====
+      { id:13, nome:"Access Point UniFi U6 Lite - Wi-Fi 6 - Dual Band",  marca:"Ubiquiti",   categoria:"Redes/Wi-Fi",  foto:null, icon:"wifi" },
+      { id:14, nome:"Roteador EdgeRouter X - 5 Portas Gigabit",          marca:"Ubiquiti",   categoria:"Redes/Wi-Fi",  foto:null, icon:"router" },
+      { id:15, nome:"Switch Gerenciável US-8-60W - 8 Portas PoE",        marca:"Ubiquiti",   categoria:"Redes/Wi-Fi",  foto:null, icon:"hub" },
+      { id:16, nome:"Access Point UniFi U6 Pro - Wi-Fi 6 - 4x4 MU-MIMO",marca:"Ubiquiti",   categoria:"Redes/Wi-Fi",  foto:null, icon:"wifi" },
+
+      // ===== COMUNICAÇÃO =====
+      { id:17, nome:"Rádio Portátil EP450 - UHF - 4W - 16 Canais",       marca:"Motorola",   categoria:"Comunicação",  foto:null, icon:"radio" },
+      { id:18, nome:"Rádio Portátil DEM400 - Digital - 16 Canais",       marca:"Motorola",   categoria:"Comunicação",  foto:null, icon:"radio" },
+      { id:19, nome:"Rádio Móvel DM4600e - Digital - VHF",               marca:"Motorola",   categoria:"Comunicação",  foto:null, icon:"radio" },
+      { id:20, nome:"Repetidora DR3000 - Digital - UHF/VHF",             marca:"Motorola",   categoria:"Comunicação",  foto:null, icon:"cell_tower" },
+    ];
+
+    let selecionados = new Set();
+    let categoriaAtual = 'todos';
+
+    function criarCard(p) {
+      const topo = p.foto
+        ? `<img src="${p.foto}" alt="${p.nome}" onerror="this.parentElement.innerHTML='<div class=\\'sem-foto\\'><span class=\\'material-symbols-outlined\\' style=\\'font-size:64px;color:#ffc000;\\'>${p.icon}</span></div>'" />`
+        : `<div class="sem-foto"><span class="material-symbols-outlined" style="font-size:64px;color:#ffc000;">${p.icon}</span></div>`;
+
+      return `
+        <div class="produto-card" id="card-${p.id}" onclick="toggleSelecao(${p.id})">
+          <div class="produto-img">${topo}</div>
+          <div class="produto-body">
+            <span class="produto-marca">${p.marca}</span>
+            <p class="produto-nome">${p.nome}</p>
+            <span class="produto-categoria">
+              <span class="material-symbols-outlined" style="font-size:14px;">category</span>
+              ${p.categoria}
+            </span>
+          </div>
+          <div class="checkbox-wrap">
+            <div class="checkbox-custom" id="check-${p.id}">
+              <span class="material-symbols-outlined" style="font-size:16px;color:#000;display:none;" id="icon-${p.id}">check</span>
+            </div>
+            <span class="checkbox-label" id="label-${p.id}">Adicionar ao orçamento</span>
+          </div>
+        </div>`;
+    }
+
+    function renderizar() {
+      const filtrados = categoriaAtual === 'todos' ? produtos : produtos.filter(p => p.categoria === categoriaAtual);
+      document.getElementById('grid-produtos').innerHTML = filtrados.map(criarCard).join('');
+      selecionados.forEach(id => {
+        const card = document.getElementById(`card-${id}`);
+        if (card) {
+          card.classList.add('selecionado');
+          document.getElementById(`icon-${id}`).style.display = 'block';
+          document.getElementById(`label-${id}`).textContent = 'Selecionado';
+        }
+      });
+    }
+
+    function toggleSelecao(id) {
+      const card = document.getElementById(`card-${id}`);
+      const icon = document.getElementById(`icon-${id}`);
+      const label = document.getElementById(`label-${id}`);
+      if (selecionados.has(id)) {
+        selecionados.delete(id);
+        card.classList.remove('selecionado');
+        icon.style.display = 'none';
+        label.textContent = 'Adicionar ao orçamento';
+      } else {
+        selecionados.add(id);
+        card.classList.add('selecionado');
+        icon.style.display = 'block';
+        label.textContent = 'Selecionado';
+      }
+      atualizarBarra();
+    }
+
+    function atualizarBarra() {
+      const barra = document.getElementById('barra-orcamento');
+      document.getElementById('barra-count').textContent = selecionados.size;
+      selecionados.size > 0 ? barra.classList.add('visivel') : barra.classList.remove('visivel');
+    }
+
+    function limparSelecao() {
+      selecionados.clear();
+      renderizar();
+      atualizarBarra();
+    }
+
+    function solicitarOrcamento() {
+      const nomes = [...selecionados].map(id => {
+        const p = produtos.find(x => x.id === id);
+        return p ? `- ${p.nome} (${p.marca})` : '';
+      }).join('%0A');
+      const msg = `Olá! Gostaria de solicitar um orçamento para os seguintes produtos:%0A%0A${nomes}%0A%0AAguardo retorno. Obrigado!`;
+      window.open(`https://wa.me/5588997237880?text=${msg}`, '_blank');
+    }
+
+    function filtrar(categoria) {
+      categoriaAtual = categoria;
+      document.querySelectorAll('[id^="cat-"]').forEach(btn => {
+        btn.className = btn.id === `cat-${categoria}` ? 'tab-cat-ativo' : 'tab-cat-inativo';
+      });
+      renderizar();
+    }
+
+    renderizar();
+  </script>
+
+</body>
+</html>

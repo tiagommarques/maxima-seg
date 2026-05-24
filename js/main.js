@@ -58,11 +58,3 @@ document.querySelectorAll('#mobile-menu a').forEach(link => {
     });
 });
 
-// --- Form submit ---
-const form = document.querySelector('form');
-if (form) {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Sua solicitação técnica foi enviada. Um consultor entrará em contato em breve.');
-    });
-}
