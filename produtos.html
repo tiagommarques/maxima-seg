@@ -30,18 +30,36 @@
     @media(min-width:640px){ .grid-produtos{ grid-template-columns:repeat(2,1fr); } }
     @media(min-width:1024px){ .grid-produtos{ grid-template-columns:repeat(3,1fr); } }
     @media(min-width:1280px){ .grid-produtos{ grid-template-columns:repeat(4,1fr); } }
+
+    /* ===== BARRA FLUTUANTE ===== */
     .barra-orcamento { position:fixed; bottom:0; left:0; right:0; z-index:100; background:#000; border-top:2px solid #ffc000; padding:1rem 1.5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; transform:translateY(100%); transition:transform 0.4s cubic-bezier(0.4,0,0.2,1); }
     .barra-orcamento.visivel { transform:translateY(0); }
     .barra-info { display:flex; align-items:center; gap:0.75rem; }
     .barra-count { background:#ffc000; color:#000; font-weight:800; font-size:14px; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
     .barra-texto { color:#fff; font-size:13px; font-weight:600; }
-    .barra-btn { background:#ffc000; color:#000; font-weight:800; font-size:12px; padding:0.75rem 1.5rem; border-radius:2px; text-transform:uppercase; letter-spacing:0.1em; border:none; cursor:pointer; display:flex; align-items:center; gap:0.5rem; white-space:nowrap; transition:background 0.2s; }
+    .barra-btn { background:#ffc000; color:#000; font-weight:800; font-size:12px; padding:0.75rem 1.5rem; border-radius:2px; text-transform:uppercase; letter-spacing:0.1em; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:0.5rem; white-space:nowrap; transition:background 0.2s; }
     .barra-btn:hover { background:#fff; }
     .barra-limpar { background:none; border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.5); font-size:11px; font-weight:600; padding:0.5rem 1rem; border-radius:2px; cursor:pointer; text-transform:uppercase; letter-spacing:0.05em; transition:all 0.2s; white-space:nowrap; }
     .barra-limpar:hover { border-color:#ffc000; color:#ffc000; }
+
+    /* Barra em 2 linhas no celular */
+    @media(max-width:639px){
+      .barra-orcamento { flex-direction:column; align-items:stretch; gap:0.75rem; padding:1rem; }
+      .barra-info { justify-content:center; }
+      .barra-acoes { display:flex; gap:0.5rem; }
+      .barra-btn { flex:1; }
+      .barra-limpar { flex:1; text-align:center; }
+    }
+
+    /* ===== FILTROS ===== */
     .tab-cat-ativo { color:#ffc000; font-weight:700; border-bottom:2px solid #ffc000; }
     .tab-cat-inativo { color:rgba(255,255,255,0.4); border-bottom:2px solid transparent; }
     .tab-cat-inativo:hover { color:#ffc000; }
+    .filtros-mobile { display:none; }
+    @media(max-width:639px){
+      .filtros-desktop { display:none !important; }
+      .filtros-mobile { display:block; margin-bottom:2rem; }
+    }
   </style>
 </head>
 
@@ -112,15 +130,34 @@
   <main style="background:#0a0a0a;padding:2rem 0 6rem;">
     <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
 
-      <!-- Filtros -->
-      <div style="display:flex;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2.5rem;overflow-x:auto;">
-        <div style="display:flex;gap:1.5rem;flex-shrink:0;">
+      <!-- Filtros Desktop (linha horizontal) -->
+      <div class="filtros-desktop" style="display:flex;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:2.5rem;">
+        <div style="display:flex;gap:1.5rem;">
           <button onclick="filtrar('todos')" id="cat-todos" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-ativo">Todos</button>
           <button onclick="filtrar('DVR')" id="cat-DVR" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">DVR</button>
           <button onclick="filtrar('Câmeras')" id="cat-Câmeras" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">Câmeras</button>
           <button onclick="filtrar('Alarmes')" id="cat-Alarmes" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">Alarmes</button>
           <button onclick="filtrar('Redes/Wi-Fi')" id="cat-Redes/Wi-Fi" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">Redes/Wi-Fi</button>
           <button onclick="filtrar('Comunicação')" id="cat-Comunicação" style="padding-bottom:1rem;padding-left:0.5rem;padding-right:0.5rem;font-size:14px;text-transform:uppercase;letter-spacing:0.08em;cursor:pointer;background:none;border:none;white-space:nowrap;" class="tab-cat-inativo">Comunicação</button>
+        </div>
+      </div>
+
+      <!-- Filtros Mobile (dropdown) -->
+      <div class="filtros-mobile">
+        <div style="position:relative;">
+          <button onclick="toggleDropdownCat()" id="btn-dropdown-cat"
+            style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.15);color:#fff;padding:0.875rem 1rem;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-radius:2px;">
+            <span id="label-cat-mobile">Todos</span>
+            <span class="material-symbols-outlined" id="icon-dropdown-cat" style="font-size:20px;transition:transform 0.2s;">expand_more</span>
+          </button>
+          <div id="dropdown-cat" style="display:none;position:absolute;top:100%;left:0;right:0;background:#1a1a1a;border:1px solid rgba(255,255,255,0.15);border-top:none;z-index:50;border-radius:0 0 2px 2px;">
+            <button onclick="selecionarCategoriaMobile('todos','Todos')" style="width:100%;text-align:left;padding:0.875rem 1rem;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:none;border:none;color:#ffc000;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.05);">Todos</button>
+            <button onclick="selecionarCategoriaMobile('DVR','DVR')" style="width:100%;text-align:left;padding:0.875rem 1rem;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.05);">DVR</button>
+            <button onclick="selecionarCategoriaMobile('Câmeras','Câmeras')" style="width:100%;text-align:left;padding:0.875rem 1rem;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.05);">Câmeras</button>
+            <button onclick="selecionarCategoriaMobile('Alarmes','Alarmes')" style="width:100%;text-align:left;padding:0.875rem 1rem;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.05);">Alarmes</button>
+            <button onclick="selecionarCategoriaMobile('Redes/Wi-Fi','Redes/Wi-Fi')" style="width:100%;text-align:left;padding:0.875rem 1rem;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.05);">Redes/Wi-Fi</button>
+            <button onclick="selecionarCategoriaMobile('Comunicação','Comunicação')" style="width:100%;text-align:left;padding:0.875rem 1rem;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;">Comunicação</button>
+          </div>
         </div>
       </div>
 
@@ -134,7 +171,7 @@
       <div class="barra-count" id="barra-count">0</div>
       <span class="barra-texto">produto(s) selecionado(s)</span>
     </div>
-    <div style="display:flex;align-items:center;gap:0.75rem;">
+    <div class="barra-acoes" style="display:flex;align-items:center;gap:0.75rem;">
       <button class="barra-limpar" onclick="limparSelecao()">Limpar</button>
       <button class="barra-btn" onclick="solicitarOrcamento()">
         <span class="material-symbols-outlined" style="font-size:18px;">send</span>
@@ -184,7 +221,7 @@
       </div>
     </div>
     <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter mt-24 pt-10 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-6">
-      <p class="font-body-md text-xs text-on-surface-variant uppercase tracking-widest">© 2024 Máxima Segurança • Ipu - CE • Todos os direitos reservados.</p>
+      <p class="font-body-md text-xs text-on-surface-variant uppercase tracking-widest">© 2026 Máxima Segurança • Ipu - CE • Todos os direitos reservados.</p>
       <div class="flex gap-6">
         <span class="text-[10px] text-white/30 uppercase tracking-widest">Tecnologia Certificada</span>
         <span class="text-[10px] text-white/30 uppercase tracking-widest">Privacidade Garantida</span>
@@ -318,6 +355,21 @@
         btn.className = btn.id === `cat-${categoria}` ? 'tab-cat-ativo' : 'tab-cat-inativo';
       });
       renderizar();
+    }
+
+    function toggleDropdownCat() {
+      const dd = document.getElementById('dropdown-cat');
+      const icon = document.getElementById('icon-dropdown-cat');
+      const aberto = dd.style.display === 'block';
+      dd.style.display = aberto ? 'none' : 'block';
+      icon.style.transform = aberto ? '' : 'rotate(180deg)';
+    }
+
+    function selecionarCategoriaMobile(categoria, label) {
+      document.getElementById('label-cat-mobile').textContent = label;
+      document.getElementById('dropdown-cat').style.display = 'none';
+      document.getElementById('icon-dropdown-cat').style.transform = '';
+      filtrar(categoria);
     }
 
     renderizar();
