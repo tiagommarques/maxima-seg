@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Parceiros | Máxima Segurança</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon-max.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/custom.css" />
+
+  <style>
+    .parceiro-wrapper { max-width: 860px; margin: 0 auto; }
+
+    /* HERO AZUL DO CARD */
+    .active-hero {
+      background: linear-gradient(160deg, #0D47A1 0%, #1565C0 35%, #1E88E5 70%, #42A5F5 100%);
+      border-radius: 16px 16px 0 0;
+      padding: 2.5rem 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .active-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+    .active-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 220px; height: 220px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .active-logo-box {
+      width: 220px; height: 220px;
+      background: #fff;
+      border-radius: 24px;
+      margin: 0 auto 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .active-logo-box img { width: 200px; height: 200px; object-fit: contain; }
+
+    .active-hero-title {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      position: relative; z-index: 2;
+      margin-bottom: 0.5rem;
+    }
+    .active-hero-sub {
+      font-size: 14px; font-weight: 700;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      position: relative; z-index: 2;
+    }
+
+    /* BODY ESCURO */
+    .active-body {
+      background: #0f1724;
+      border-radius: 0 0 16px 16px;
+      padding: 2.5rem;
+    }
+
+    /* Grid 2 colunas */
+    .active-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    @media(max-width:640px){ .active-grid { grid-template-columns: 1fr; } }
+
+    .col-title {
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #42A5F5;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .col-title .material-symbols-outlined { font-size: 16px; }
+
+    .active-desc {
+      font-size: 16px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      margin-bottom: 1.25rem;
+    }
+
+    .tag-lista { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      background: rgba(66,165,245,0.1);
+      border: 1px solid rgba(66,165,245,0.2);
+      color: #90CAF9;
+      font-size: 11px; font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Serviços */
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    @media(max-width:400px){ .servicos-grid { grid-template-columns: 1fr; } }
+
+    .servico-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px;
+      padding: 1rem 1.125rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .servico-item:hover {
+      border-color: rgba(66,165,245,0.3);
+      background: rgba(66,165,245,0.05);
+    }
+    .servico-item .material-symbols-outlined {
+      font-size: 20px; color: #42A5F5; flex-shrink: 0; margin-top: 2px;
+    }
+    .servico-item p { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.3; margin: 0; }
+    .servico-item small { font-size: 11px; color: rgba(255,255,255,0.35); display: block; margin-top: 3px; }
+
+    /* Divisor */
+    .active-divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 2rem 0; }
+
+    /* Instagram */
+    .ig-handle {
+      text-align: center;
+      font-size: 13px; font-weight: 700;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 1.25rem;
+    }
+
+    /* CTAs */
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media(max-width:480px){ .cta-grid { grid-template-columns: 1fr; } }
+
+    .btn-wpp {
+      background: #25D366; color: #fff;
+      font-size: 13px; font-weight: 800;
+      padding: 1.1rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-wpp:hover { background: #1da853; transform: translateY(-2px); }
+
+    .btn-ig {
+      background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+      color: #fff;
+      font-size: 13px; font-weight: 800;
+      padding: 1.1rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-ig:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .nota-parceiro {
+      text-align: center;
+      font-size: 11px; color: rgba(255,255,255,0.18);
+      margin-top: 1.5rem; letter-spacing: 0.04em; line-height: 1.6;
+    }
+  </style>
+</head>
+
+<body class="overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 bg-[#000000] border-b border-white/5 transition-all duration-300">
+    <div id="nav-container" class="flex justify-between items-center h-18 px-4 md:px-gutter max-w-container-max mx-auto transition-all duration-300">
+      <div class="flex items-center">
+        <a href="index.html">
+          <img id="nav-logo" alt="Máxima Segurança Logo" class="h-12 w-auto object-contain transition-all duration-300 hover:scale-105" src="assets/images/logo-nav.png" onerror="this.style.display='none'" />
+        </a>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="index.html#servicos">Serviços</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="sobre.html">Sobre Nós</a>
+        <a class="text-white/60 font-medium hover:text-primary transition-all duration-300 text-base tracking-wide" href="portfolio.html">Portfólio de Clientes</a>
+        <a class="text-primary font-bold border-b-2 border-primary pb-0.5 text-base tracking-wide" href="parceiros.html">Parceiros</a>
+      </div>
+      <div class="hidden md:flex items-center gap-4">
+        <div class="flex items-center gap-1.5 text-white/40">
+          <span class="material-symbols-outlined text-primary" style="font-size:16px">shield</span>
+          <span class="text-[11px] uppercase tracking-wider">Segurança Certificada</span>
+        </div>
+        <a href="orcamento.html">
+          <button class="bg-primary text-black font-bold text-xs px-5 py-2.5 rounded-sm active:scale-95 transition-all duration-300 hover:bg-white tracking-wider uppercase">Orçamento</button>
+        </a>
+      </div>
+      <div class="flex md:hidden items-center gap-3">
+        <a href="orcamento.html">
+          <button class="bg-primary text-black font-bold text-[11px] px-4 py-2 rounded-sm uppercase tracking-wider active:scale-95 transition-all">Orçamento</button>
+        </a>
+        <button id="menu-btn" class="flex flex-col justify-center items-center w-9 h-9 gap-1.5 rounded-sm hover:bg-white/5 transition-all" aria-label="Menu">
+          <span id="bar1" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="bar2" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+          <span id="bar3" class="block w-5 h-0.5 bg-white transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-[#0a0a0a] border-t border-white/5">
+      <div class="px-4 py-6 flex flex-col gap-1">
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors" href="index.html#servicos">Serviços</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors" href="sobre.html">Sobre Nós</a>
+        <a class="text-white/60 font-medium text-sm uppercase tracking-widest py-3 border-b border-white/5 hover:text-primary transition-colors" href="portfolio.html">Portfólio de Clientes</a>
+        <a class="text-primary font-bold text-sm uppercase tracking-widest py-3" href="parceiros.html">Parceiros</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO DA PÁGINA -->
+  <section style="position:relative;min-height:28vh;display:flex;align-items:center;justify-content:center;overflow:hidden;padding-top:72px;padding-bottom:2rem;">
+    <div style="position:absolute;inset:0;z-index:0;">
+      <img src="assets/images/hero-bg.jpg" style="width:100%;height:100%;object-fit:cover;opacity:0.3;" onerror="this.style.display='none'" />
+      <div class="hero-overlay" style="position:absolute;inset:0;"></div>
+    </div>
+    <div style="position:relative;z-index:10;text-align:center;padding:0 1rem;max-width:900px;margin:0 auto;">
+      <h1 style="font-family:'Inter',sans-serif;font-size:clamp(24px,3.5vw,42px);font-weight:800;color:#fff;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:-0.01em;">
+        Nossos <span style="color:#ffc000;">Parceiros</span>
+      </h1>
+      <div style="width:80px;height:6px;background:#ffc000;margin:1rem auto;"></div>
+      <p style="color:rgba(255,255,255,0.5);font-size:clamp(13px,1.5vw,16px);line-height:1.7;max-width:600px;margin:0 auto;">
+        Unimos forças com as maiores referências do mercado para entregar soluções robustas, suporte especializado e tecnologia de ponta.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTEÚDO -->
+  <main style="background:#0a0a0a;padding:3rem 0 6rem;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 1.5rem;">
+
+      <div class="parceiro-wrapper">
+
+        <!-- Label -->
+        <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:2rem;">
+          <div style="width:3px;height:28px;background:#ffc000;border-radius:2px;"></div>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.35);">Parceiro em Destaque</span>
+        </div>
+
+        <!-- CARD DA ACTIVE -->
+        <div style="border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.5);">
+
+          <!-- Hero azul com logo -->
+          <div class="active-hero">
+            <div class="active-logo-box">
+              <img
+                src="assets/images/logo-active.png"
+                alt="Active Serviços"
+                onerror="this.parentElement.innerHTML='<svg width=\'70\' height=\'70\' viewBox=\'0 0 80 80\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'><defs><linearGradient id=\'g\' x1=\'0\' y1=\'0\' x2=\'1\' y2=\'1\'><stop offset=\'0%\' stop-color=\'#42A5F5\'/><stop offset=\'100%\' stop-color=\'#1565C0\'/></linearGradient></defs><path d=\'M16 20 L48 8 L64 24 L32 36 Z\' fill=\'url(#g)\' opacity=\'0.9\'/><path d=\'M16 20 L32 36 L16 60 L8 40 Z\' fill=\'#1976D2\'/><path d=\'M32 36 L64 24 L64 56 L32 68 Z\' fill=\'#1565C0\'/><rect x=\'26\' y=\'30\' width=\'28\' height=\'5\' rx=\'2.5\' fill=\'white\' transform=\'rotate(-15 26 30)\'/><rect x=\'26\' y=\'44\' width=\'28\' height=\'5\' rx=\'2.5\' fill=\'white\' transform=\'rotate(-15 26 44)\'/></svg>'"
+              />
+            </div>
+            <div class="active-hero-sub">Parceiro de Serviços, Projetos e Infraestrutura</div>
+          </div>
+
+          <!-- Body escuro -->
+          <div class="active-body">
+
+            <div class="active-grid">
+
+              <!-- Coluna esquerda: especialização -->
+              <div>
+                <div class="col-title">
+                  <span class="material-symbols-outlined">verified</span>
+                  Especialização Técnica
+                </div>
+                <p class="active-desc">
+                  A Active Serviços é uma empresa especializada em soluções integradas de infraestrutura. Com anos de experiência no setor, entregam qualidade técnica, agilidade e comprometimento em cada projeto.
+                </p>
+                <div class="tag-lista">
+                  <span class="tag">Melhor Negócio</span>
+                  <span class="tag">Inovação Contínua</span>
+                  <span class="tag">Equipe Diferenciada</span>
+                  <span class="tag">Ética e Honestidade</span>
+                  <span class="tag">Respeito Ambiental</span>
+                  <span class="tag">Agilidade</span>
+                  <span class="tag">Qualidade no Serviço</span>
+                  <span class="tag">Comprometimento</span>
+                </div>
+              </div>
+
+              <!-- Coluna direita: serviços -->
+              <div>
+                <div class="col-title">
+                  <span class="material-symbols-outlined">build</span>
+                  Serviços em Destaque
+                </div>
+                <div class="servicos-grid">
+                  <div class="servico-item">
+                    <span class="material-symbols-outlined">ac_unit</span>
+                    <div>
+                      <p>Ar Condicionado</p>
+                      <small>Instalação</small>
+                      <small>Manutenção</small>
+                      <small>Remanejamento</small>
+                      <small>Higienização</small>
+                    </div>
+                  </div>
+                  <div class="servico-item">
+                    <span class="material-symbols-outlined">shield</span>
+                    <div>
+                      <p>Segurança Eletrônica</p>
+                      <small>Câmeras de Segurança</small>
+                      <small>Alarmes Residenciais</small>
+                      <small>Alarmes Corporativos</small>
+                      <small>Vídeo Porteiro</small>
+                    </div>
+                  </div>
+                  <div class="servico-item">
+                    <span class="material-symbols-outlined">bolt</span>
+                    <div>
+                      <p>Cerca Elétrica</p>
+                      <small>Instalação</small>
+                      <small>Manutenção</small>
+                      <small>Residencial</small>
+                      <small>Comercial</small>
+                    </div>
+                  </div>
+                  <div class="servico-item">
+                    <span class="material-symbols-outlined">wifi</span>
+                    <div>
+                      <p>Redes e Conectividade</p>
+                      <small>Rede Cabeada</small>
+                      <small>Wi-Fi Corporativo</small>
+                      <small>Configuração</small>
+                      <small>Infraestrutura de TI</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <hr class="active-divider" />
+
+            <!-- Instagram handle -->
+            <div class="ig-handle">Acompanhe o trabalho do nosso parceiro · @active_servicos</div>
+
+            <!-- Botões -->
+            <div class="cta-grid">
+              <a href="https://wa.me/5588997237880?text=Olá! Vim pelo site da Máxima Segurança e gostaria de saber mais sobre os serviços da Active Serviços." target="_blank" class="btn-wpp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                Falar no WhatsApp
+              </a>
+              <a href="https://www.instagram.com/active_servicos/" target="_blank" class="btn-ig">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                Seguir no Instagram
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <p class="nota-parceiro">
+          A Active Serviços é uma empresa parceira independente. A Máxima Segurança indica seus serviços com base em experiência e confiança mútua.
+        </p>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 w-full py-24 bg-[#000000]">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 px-margin-mobile md:px-gutter max-w-container-max mx-auto">
+      <div class="lg:col-span-1">
+        <div class="flex flex-col gap-8 mb-8">
+          <img alt="Máxima Segurança Logo" class="w-auto self-start h-[180px] object-contain" src="assets/images/logo.png" onerror="this.style.display='none'" />
+          <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">Referência em segurança eletrônica. Protegendo vidas e patrimônios com integridade e inovação tecnológica.</p>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Serviços Especializados</h4>
+        <ul class="space-y-5 font-body-md text-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Monitoramento CFTV IP</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Cerca Residencial/Industrial</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Redes Wi-Fi Corporativas</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Manutenção Preventiva</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Automação de Portões</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Links Institucionais</h4>
+        <ul class="space-y-5 font-body-md text-body-md">
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="sobre.html">Sobre a Empresa</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Início</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="portfolio.html">Portfólio</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="parceiros.html">Parceiros</a></li>
+          <li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="contato.html">Contato Direto</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-bold text-xs uppercase mb-8 tracking-[0.2em] border-l-2 border-primary pl-4">Newsletter Técnica</h4>
+        <p class="text-on-surface-variant mb-6 font-body-md text-body-md">Receba atualizações sobre novas tecnologias de segurança.</p>
+        <div class="flex">
+          <input class="bg-white/5 border-white/10 rounded-l-sm focus:border-primary text-white py-3 px-4 w-full outline-none" placeholder="Seu melhor e-mail" type="email" />
+          <button class="bg-primary text-black px-6 rounded-r-sm hover:bg-white transition-all">
+            <span class="material-symbols-outlined font-bold">send</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter mt-24 pt-10 border-t border-white/5 text-center flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="font-body-md text-xs text-on-surface-variant uppercase tracking-widest">© 2026 Máxima Segurança • Ipu - CE • Todos os direitos reservados.</p>
+      <div class="flex gap-6">
+        <span class="text-[10px] text-white/30 uppercase tracking-widest">Tecnologia Certificada</span>
+        <span class="text-[10px] text-white/30 uppercase tracking-widest">Privacidade Garantida</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp flutuante -->
+  <a class="fixed bottom-10 right-10 z-[60] bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform group" href="https://wa.me/5588997237880" target="_blank">
+    <div class="absolute -top-12 right-0 bg-white text-black px-4 py-2 rounded-sm text-xs font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none uppercase tracking-tighter">Falar no WhatsApp</div>
+    <svg fill="currentColor" height="32" viewBox="0 0 24 24" width="32" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+
+</body>
+</html>
