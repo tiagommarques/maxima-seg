@@ -70,5 +70,6 @@ document.querySelectorAll('nav a').forEach(link => {
     if (linkPath === currentPath) {
         link.classList.add('text-primary');
         link.classList.remove('text-white/60');
+        link.classList.remove('text-on-surface-variant');
     }
 });
