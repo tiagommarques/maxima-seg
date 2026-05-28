@@ -65,11 +65,20 @@ if (menuBtn && mobileMenu && bar1 && bar2 && bar3) {
 // --- Active nav link ---
 const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-document.querySelectorAll('nav a, footer a').forEach(link => {
+// Navbar: destaque com sublinhado
+document.querySelectorAll('nav a').forEach(link => {
+    const linkPath = link.getAttribute('href').split('/').pop().split('#')[0] || 'index.html';
+    if (linkPath === currentPath) {
+        link.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary', 'pb-0.5');
+        link.classList.remove('text-white/60', 'text-on-surface-variant', 'font-medium');
+    }
+});
+
+// Footer: destaque só com cor, sem sublinhado
+document.querySelectorAll('footer a').forEach(link => {
     const linkPath = link.getAttribute('href').split('/').pop().split('#')[0] || 'index.html';
     if (linkPath === currentPath) {
         link.classList.add('text-primary');
-        link.classList.remove('text-white/60');
-        link.classList.remove('text-on-surface-variant');
+        link.classList.remove('text-white/60', 'text-on-surface-variant');
     }
 });
