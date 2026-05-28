@@ -65,7 +65,7 @@ if (menuBtn && mobileMenu && bar1 && bar2 && bar3) {
 // --- Active nav link ---
 const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-document.querySelectorAll('nav a').forEach(link => {
+document.querySelectorAll('nav a, footer a').forEach(link => {
     const linkPath = link.getAttribute('href').split('/').pop().split('#')[0] || 'index.html';
     if (linkPath === currentPath) {
         link.classList.add('text-primary');
