@@ -65,8 +65,8 @@ if (menuBtn && mobileMenu && bar1 && bar2 && bar3) {
 // --- Active nav link ---
 const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-// Navbar: destaque com sublinhado
-document.querySelectorAll('nav a').forEach(link => {
+// Navbar: destaque com sublinhado (ignora o link da logo)
+document.querySelectorAll('nav a:not(.nav-logo-link)').forEach(link => {
     const linkPath = link.getAttribute('href').split('/').pop().split('#')[0] || 'index.html';
     if (linkPath === currentPath) {
         link.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary', 'pb-0.5');
